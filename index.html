@@ -1,0 +1,92 @@
+<!-- 
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue-powered View</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      @keyframes spin {
+        to {
+          rotate: 360deg;
+        }
+      }
+
+      .loading-spinner {
+        animation: spin 2s linear;
+        border-radius: 100%;
+        border: 4px dotted rebeccapurple;
+        height: 32px;
+        width: 32px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      var users;
+
+      $.get({
+        url: 'https://dummyjson.com/users',
+        success: function (response) {
+          users = response;
+        },
+      });
+
+      function setTableData() {
+        console.log('checking if reponse returned users');
+
+        if (users) {
+          $('.loading-spinner').hide();
+          $('#users').show();
+          const tableRows = users.users.map(user => {
+            var row = $('<tr>');
+            row.append($('<td>').text("@" + user.username)); // user's username
+            row.append($('<td>').text(user.firstName + '&nbsp;' + user.lastName)); // user's full name
+            row.append($('<input readonly>').val(user.email)); // user's email -- not editable
+
+            // TODO: made this a <pre> so that the adderss would go on two lines,
+            //       but now the font is weird.
+            row.append($('<pre>').text(user.address + "\n" + user.address.city + ", " + user.address.state + " " + user.address.zip)); // user's address
+            return row;
+          });
+          $("#users").html(tableRows);
+
+          clearInterval(setTableData);
+        }
+      }
+
+      setInterval(setTableData, 3000);
+    </script>
+
+    <main>
+      <h1>Users table</h1>
+      <div class="loading-spinner"></div>
+      <table id="users" style="display: none"></table>
+    </main>
+
+    <div id="vue-root"></div>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html> -->
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue-powered View</title>
+  </head>
+  <body>
+    <div id="vue-root"></div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
